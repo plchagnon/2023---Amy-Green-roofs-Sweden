@@ -16,12 +16,12 @@ These amplicons were normalized, and multiplexed in a single Illumina MiSeq PE30
 ```mermaid
 %%{init: {'themeVariables': { 'edgeLabelBackground': '#FFF'}}}%%
 flowchart TD
-raw(Raw fastq files):::bl -- Truncate <br> Remove primers <br> Quality filter --> q(Quality filtered reads)
-q-->m(Merged pairs)
-m-- Consensus chim. removal -->chim(Chimera-removed from ASVs)
+raw(Raw fastq files):::bl -- Truncate <br> Remove primers <br> Quality filter --> q(Quality filtered reads):::bl
+q-->m(Merged pairs):::bl
+m-- Consensus chim. removal -->chim(Chimera-removed from ASVs):::bl
 chim--> tax(Assign them a taxonomy using a ref database) --> rar(Rarefied ASV table) -->st([<b>DOWNSTREAM STATISTIC ANALYSES</b>]) 
 
-style st fill:#000000,nodeTextColor:#FFFFFF
+style st fill:#000000,color:#FFFFFF
 
 classDef bl fill:#9BBBE1,stroke:#24548B 
 
