@@ -21,7 +21,7 @@ q-->m(Merged pairs)
 m-- Consensus chim. removal -->chim(Chimera-removed from ASVs)
 chim--> tax(Assign them a taxonomy using a ref database) --> rar(Rarefied ASV table) -->st([<b>DOWNSTREAM STATISTIC ANALYSES</b>]) 
 
-style st fill:#000000
+style st fill:#000000,nodeTextColor:#FFFFFF
 
 classDef bl fill:#9BBBE1,stroke:#24548B 
 
