@@ -19,7 +19,7 @@ flowchart TD
 raw(Raw fastq files):::bl -- Truncate <br> Remove primers <br> Quality filter --> q(Quality filtered reads):::bl
 q-->m(Merged pairs):::bl
 m-- Consensus chim. removal -->chim(Chimera-removed from ASVs):::bl
-chim--> tax(Assign them a taxonomy using a ref database) --> rar(Rarefied ASV table) -->st([<b>DOWNSTREAM STATISTIC ANALYSES</b>]) 
+chim--> tax(Assign them a taxonomy using a ref database):::bl --> rar(Rarefied ASV table):::bl -->st([<b>DOWNSTREAM STATISTIC ANALYSES</b>]) 
 
 style st fill:#000000,color:#FFFFFF
 
@@ -40,7 +40,16 @@ These sequences were analyzed in batch in the R package ``dada2`` using [the fol
 - Sequence trimming (upon visual inspection of median quality scores ~base position): it was decided to trim fwd reads at 250bp and rev reads at 200 bp
 - Not allowing any indeterminate base pair (N)
 
-Then follows error learnin and sample inference, after which paired-reads are merged together. Chimeras are then inferred using the "consensus" method, and ta
+Then follows error learning and sample inference, after which paired-reads are merged together. Chimeras are then inferred using the "consensus" method, and taxonomy assignment using UNITE [version = 9.0]. All these steps were submitted to a computer cluster (Compute Canada) via SLURM, using the following [bash script](./Rjob.sh).
+
+*** Because this bioinformatic pipeline has been applied to a whole run of ITS sequencing, including not only the samples for this project but also other samples from another project (Coralie's project on *Lonicera maackii*), we had to run [this little code chunk](./Filtering%20Amy's%20samples%20only.R) to only keep for downstream analyses the samples belong to this project.
+
+We thus ended up with [this particular ``.RData`` file](./Amy_ITS.RData), which contains only two objects:
+
+- ``comm`` : A metacommunity, i.e. sites $\times$ species (fungi) matrix
+- ``taxa``: A taxonomy for the fungi found in ``comm`` (i.e., columns)
+
+<br> These objects along with site properties and vegetation data, will be the core of downstream analyses. 
 <br><br>
 
 # Prokaryotes (16S)
